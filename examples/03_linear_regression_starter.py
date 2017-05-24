@@ -19,18 +19,23 @@ data = np.asarray([sheet.row_values(i) for i in range(1, sheet.nrows)])
 n_samples = sheet.nrows - 1
 
 # Step 2: create placeholders for input X (number of fire) and label Y (number of theft)
-
+X = tf.placeholder(tf.float32, name='x)
+Y = tf.placeholder(tf.float32, name='y')
 
 # Step 3: create weight and bias, initialized to 0
 # name your variables w and b
+w = tf.Variables(0.0, name='w')
+b = tf.Variables(0.0, name='b')
 
 
 # Step 4: predict Y (number of theft) from the number of fire
 # name your variable Y_predicted
-
+Y_predicted = w * x + b
+		   
 
 # Step 5: use the square error as the loss function
 # name your variable loss
+loss = tf.Square(Y - Y_predicted)
 
 # Step 6: using gradient descent with learning rate of 0.01 to minimize loss
 optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.001).minimize(loss)
@@ -39,7 +44,7 @@ optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.001).minimize(loss
 with tf.Session() as sess:
 	# Step 7: initialize the necessary variables, in this case, w and b
 	# TO - DO	
-
+	sess.run(tf.global_variables_initializer())
 	# Step 8: train the model
 	for i in range(100): # run 100 epochs
 		total_loss = 0
